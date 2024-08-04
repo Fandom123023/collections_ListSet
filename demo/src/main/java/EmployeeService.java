@@ -12,7 +12,7 @@ public class EmployeeService {
             new Employee("ричард", 40000,7),
             new Employee("джаред",50000,2),
             new Employee("динэш",35000,1)));
-    public Employee findEmployeeMinSelary(int department){
+    public Employee findEmployeeMinSalary(int department){
         return SiliconValley.stream().filter(employee -> employee.getDepartment() == department).
                 min(Comparator.comparingInt(employee -> employee.getSalery())).
                 orElseThrow(() -> new EmployeeDepartmentExeptiom());
@@ -26,8 +26,8 @@ public class EmployeeService {
         }
         return employees;
 
-        static Map<Integer, List<Employee>> allEmployee() {
-            return SiliconValley.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+        static Map<Integer, List<Employee>> allEmployee {
+            return SiliconValley.stream().collect(Collectors.groupingBy(Employee :: getDepartment));
         }
     }
 }
