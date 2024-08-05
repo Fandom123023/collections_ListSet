@@ -1,3 +1,4 @@
+import exeption.EmployeeDepartmentExeptiom;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,17 +18,25 @@ public class EmployeeService {
                 min(Comparator.comparingInt(employee -> employee.getSalery())).
                 orElseThrow(() -> new EmployeeDepartmentExeptiom());
     }
-    public List<Employee> allEmployeeDepartment(int department) {
-        List<Employee> employees = SiliconValley.stream()
-                .filter(employee -> employee.getDepartment() == department)
-                .collect(Collectors.toList());
-        if (employees.isEmpty()){
-            throw new EmployeeDepartmentExeptiom();
-        }
-        return employees;
-
-        static Map<Integer, List<Employee>> allEmployee {
-            return SiliconValley.stream().collect(Collectors.groupingBy(Employee :: getDepartment));
-        }
+    public Employee findEmployeeMaxSalary(int department) {
+        return SiliconValley.stream().filter(employee -> employee.getDepartment() == department).
+                max(Comparator.comparingInt(employee -> employee.getSalery())).
+                orElseThrow(() -> new EmployeeDepartmentExeptiom());
     }
-}
+
+        public List<Employee> allEmployeeDepartment (int department) {
+            List<Employee> employees = SiliconValley.stream()
+                    .filter(employee -> employee.getDepartment() == department)
+                    .collect(Collectors.toList());
+            if (employees.isEmpty()) {
+                throw new EmployeeDepartmentExeptiom();
+            }
+            return employees;
+        }
+            static Map<Integer, List<Employee>> allEmployee () {
+                return SiliconValley.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+            }
+
+    }
+
+
