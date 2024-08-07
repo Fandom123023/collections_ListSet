@@ -1,42 +1,39 @@
 package pro.sky.spring27.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.spring27.model.Employee;
-import pro.sky.spring27.service.EmployeeService;
-
 import pro.sky.spring27.service.EmployeeServiceImpl;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    private EmployeeService service ;
-
-    public EmployeeController(EmployeeService service) {
-        this.service = service;
+    private EmployeeServiceImpl employeeServiceIml;
+@Autowired
+    public EmployeeController(EmployeeServiceImpl employeeServiceIml) {
+        this.employeeServiceIml = employeeServiceIml;
     }
 @GetMapping("/add")
-    public Employee add1(String firstName, String lastName) {
-
-        Employee employee =  service.add(firstName, lastName);
-        return employee;
-
-    }@GetMapping("/remove")
-    public Employee remove1 (String firstName, String lastName){
-        return service.remove(firstName,lastName);
+    public Employee add(@RequestParam String firstName,@RequestParam String lastName) {
+    return employeeServiceIml.add(firstName,lastName);
+}
+    @GetMapping("/remove")
+    public Employee remove (@RequestParam String firstName, @RequestParam String lastName){
+        return employeeServiceIml.remove(firstName,lastName);
     }
     @GetMapping("/find")
-    public Employee find (String firstName, String lastName){
-        return service.find(firstName, lastName);
+    public Employee find (@RequestParam String firstName, @RequestParam String lastName){
+        return employeeServiceIml.find(firstName, lastName);
     }
     @GetMapping("/all")
 
-    public Collection<Employee> all (){
-        return service.all();
+    public Map<String,Employee> all (){
+        return employeeServiceIml.all();
     }
 
 }
