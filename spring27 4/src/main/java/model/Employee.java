@@ -1,12 +1,10 @@
-package pro.sky.spring27.model;
-
+package model;
 
 import java.util.Objects;
 
 public class Employee {
-    private String firstName;
-
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
@@ -17,27 +15,8 @@ public class Employee {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-    public String getFullName(){
-        return firstName+" " + lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
     }
 
     @Override
@@ -52,11 +31,12 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(firstName, lastName);
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }
-
-
-
-
-
-
-
