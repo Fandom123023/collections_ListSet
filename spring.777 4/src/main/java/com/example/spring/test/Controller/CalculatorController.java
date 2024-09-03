@@ -1,5 +1,8 @@
 package com.example.spring.test.Controller;
 
+import com.example.spring.test.Exception.DivisionByZeroException;
+import com.example.spring.test.Exception.FieldValueExceptionParam1;
+import com.example.spring.test.Exception.FieldValueExceptionParam2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,8 +19,7 @@ public class CalculatorController {
     }
 
     @GetMapping("/plus")
-    public String plus(@RequestParam(value = "num1", required = false) Float a,
-                       @RequestParam(value = "num2", required = false) Float b) {
+    public String plus(@RequestParam(value = "num1", required = false) Float a, @RequestParam(value = "num2", required = false) Float b) {
         return buildView("+", a, b);
     }
 
@@ -27,8 +29,7 @@ public class CalculatorController {
     }
 
     @GetMapping("/multiply")
-    public String multiply(@RequestParam(value = "num1", required = false) Float a,
-                           @RequestParam(value = "num2", required = false) Float b) {
+    public String multiply(@RequestParam(value = "num1", required = false) Float a, @RequestParam(value = "num2", required = false) Float b) {
         return buildView("*", a, b);
     }
 
@@ -41,8 +42,8 @@ public class CalculatorController {
         if (operand1 == null) {
             throw new FieldValueExceptionParam1();
         } else if (operand2 == null) {
-            throw new FieldValueExceptionParam2()
-                    ;
+            throw new FieldValueExceptionParam2();
+
         }
         if ("/".equals(operation) & operand2 == 0) {
             throw new DivisionByZeroException();

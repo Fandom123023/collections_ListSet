@@ -1,5 +1,6 @@
 package com.example.spring.test.Controller;
 
+import com.example.spring.test.Exception.DivisionByZeroException;
 import org.springframework.stereotype.Service;
 
 @Service
