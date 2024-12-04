@@ -8,6 +8,7 @@ import pro.sky.spring27.service.EmployeeService;
 
 import pro.sky.spring27.service.EmployeeServiceImpl;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,7 @@ public class EmployeeController {
     }
     @GetMapping("/all")
 
-    public List<Employee> all (){
+    public Collection<Employee> all (){
         return service.all();
     }
 

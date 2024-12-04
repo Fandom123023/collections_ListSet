@@ -6,12 +6,12 @@ import pro.sky.spring27.exception.EmployeeNotFoundException;
 import pro.sky.spring27.exception.EmployeeStorageFullException;
 import pro.sky.spring27.model.Employee;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private static final int COUNT_EMPLOYEE = 9;
-    private List<Employee> workers = new ArrayList<>();
+    private Map<String,Employee> workers = new HashMap<>();
 
     /**
      * добавляет сотрудника
@@ -26,16 +26,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         Employee employee = new Employee(firstName, lastName);
-        if (workers.contains(employee)) {
+        if (workers.containsValue(employee)) {
             throw new EmployeeAlreadyAddedException("уже имеется в коллекции");
         }
-        workers.add(employee);
+        workers.put(firstName + lastName,employee);
         return employee;
     }
 
     @Override
-    public List<Employee> all() {
-        return workers;
+    public Collection<Employee> all() {return workers.values();
     }
 
     @Override
@@ -52,10 +51,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         @Override
         public Employee find (String firstName, String lastName){
             Employee employee = new Employee(firstName, lastName);
-            if (workers.contains(employee)) {
-                return employee;
+            if (employee.containsKey(employee.get.FullName())) {
+                return employee.get(employee.getFullName());
             }
             throw new EmployeeNotFoundException("сотрудник не найден");
     }
+    @Override
+    public Collection<Employee> () {
+        return Collection.unmodifiableCollection(employee.values());
+    }
+
 
 }
